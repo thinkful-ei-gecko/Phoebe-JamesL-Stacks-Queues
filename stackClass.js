@@ -105,39 +105,26 @@ function matchParenth(str) {
 
 function sortStack(stack) {
   let tempStack = new Stack()
-  tempStack.push(stack.pop().data)
-  let tempVar = stack.pop().data
-  while(stack.top !== null || tempVar) 
+  tempStack.push(stack.pop())
+  let tempVar = stack.pop()
+  while(stack.top !== null) {
     if(stack.top) {
       if(tempVar > tempStack.top.data) {
         tempStack.push(tempVar)
-        tempVar = stack.pop().data
+        tempVar = stack.pop()
       }
       else{
-        stack.push(tempStack.pop().data)
+        stack.push(tempStack.pop())
+        // tempStack.push(tempVar)
       }
-      
+    }
+  }
+  tempStack.push(tempVar)
+  while(tempStack.top !== null) {
+    stack.push(tempStack.pop())
+  }
+  display(stack);
 }
-
-
-
-  // while(stack.top.next !== null) {
-  //   top = stack.top
-  //   next = stack.top.next
-  //   if(top.data < next.data) {
-  //     tempStack.push(stack.pop())
-  //   }
-  //   if(top.data > next.data) {
-  //     tempVar = stack.pop().data
-  //   }
-  //   if(tempVar) {
-  //     stack.push(tempVar)
-  //   }
-  // }
-  // while(tempStack.top.next !== null) {
-
-  // }
-
 
 function main() {
   let starTrek = new Stack()
@@ -151,4 +138,4 @@ function main() {
   starTrek.push(2)
   sortStack(starTrek)
 }
-main()
+console.log(main())
