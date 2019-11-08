@@ -1,3 +1,6 @@
+// ================================================================================
+// 6. Create a queue using Singly linked list
+
 class _Node {
 	constructor(value) {
 		this.value = value;
@@ -72,15 +75,24 @@ function remove(data, queue) {
 	display(queue);
 }
 
-function squareDance(array) {
-	const spares = new Queue();
-	//create a tempVar that compares the incoming var; if !gender then
-	//start w/ spare queue, send in dancers list
+// ================================================================================
+//9. Square dance pairing
 
-	spares.enqueue(dancer);
-	//if genders don't match then let the partner equal spare.dequeue
-}
+const dancers = [
+	"f Jane",
+	"m Frank",
+  "m John",
+  "m Sherlock",
+	"f Madonna",
+	"m David",
+	"m Christopher",
+	"f Beyonce"
+];
 
+/**
+ * @function squareDance
+ * @param {arr} dancers 
+ */
 function squareDance(dancers) {
 	let spares = new Queue();
 	for (let i = 0; i < dancers.length; i++) {
@@ -96,68 +108,68 @@ function squareDance(dancers) {
 	display(spares);
 }
 
-let dancers = [
-	"f jane",
-	"m frank",
-	"m john",
-	"f madonna",
-	"m david",
-	"m mike",
-	"f ashley"
-];
+/**
+ * @function squareDanceStr
+ * @param {str} dancer 
+ * @param {queue} queue 
+ */
+function squareDanceStr(dancer, queue) {
+  //If no one of the opposite gender is waiting, add them to the queue
+  //if someone of the opposite gender is waiting, pop someone from the opp gender and return both namea
+	if (queue.first === null) {
+    queue.enqueue(dancer);
+  } else if (dancer[0] !== queue.first.value[0]) {
+    let partner = queue.dequeue();
+    console.log(dancer.slice(2) + ' + ' + partner.slice(2));
+  } else {
+    queue.enqueue(dancer);
+  }
+  return queue;
+}
 
-console.log(squareDance(dancers));
-
-// function squareDanceSingle(dancer, maleQ, womenQ) {
-//   //If no one of the opposite gender is waiting, add them to the queue
-//   //if someone of the opposite gender is waiting, pop someone from the opp gender and return both namea
-// 	if (dancer.gender === male) {
-// 		if (womenQ.first === null) {
-// 			//add male to male queue
-//       maleQ.enqueue(dancer);
-//       return;
-// 		}
-// 	}
-// 	if (dancer.gender === woman) {
-// 		if (maleQ.first === null) {
-// 			//add male to male queue
-//       maleQ.enqueue(dancer);
-//       return;
-// 		}
-// 	}
-// }
-
+// ================================================================================
+//10. The Ophidian Bank 
 function ophidian(queue) {
-	while (queue.first !== null) {
-		let counter = 0;
-		while (counter < 4 && queue.first !== null) {
+  // while there are people in the queue
+  while (queue.first !== null) {
+    let lastInLine = false;
+  
+    // every third person must go back in line because of wrong paperwork
+    for (let i=1;i<4;i++) {
       console.log(`Served ${queue.first.value}`);
+  
+      //before dequeueing, check if this was the last node. if so, exit the loop.
+      if (lastInLine) {
+        return;
+      }
       queue.dequeue();
-      counter++;
+
+      //sets lastInLine to true if last in line
+      if (queue.first.next === null) {
+        lastInLine = true;
+      }
     }
-      console.log(`${queue.first.value} had the wrong paperwork and enqueues`)  
-    
-    queue.enqueue(queue.dequeue()) 
-    if (queue.first.next === null) {
-      console.log(`Served ${queue.first.value}`);
-      queue.dequeue();
-      console.log('Everyone was served')
-    }
+
+    console.log(`${queue.first.value} had the wrong paperwork and enqueues`)  
+    queue.enqueue(queue.dequeue());
   }
 }
 
 function main() {
-	const starTrekQ = new Queue();
-	starTrekQ.enqueue("Kirk");
-	starTrekQ.enqueue("Spock");
-	starTrekQ.enqueue("Uhura");
-	starTrekQ.enqueue("Sulu");
-	starTrekQ.enqueue("Checkov");
+	// const starTrekQ = new Queue();
+	// starTrekQ.enqueue("Kirk");
+	// starTrekQ.enqueue("Spock");
+	// starTrekQ.enqueue("Uhura");
+	// starTrekQ.enqueue("Sulu");
+	// starTrekQ.enqueue("Checkov");
 	// console.log(JSON.stringify(starTrekQ))
 	// console.log(peek(starTrekQ))
 	// display(starTrekQ)
 	// console.log(isEmpty(starTrekQ))
   // console.log(remove("Spock", starTrekQ));
-  ophidian(starTrekQ);
+  // console.log(squareDance(dancers));
+  // const dancingQueue = new Queue();
+  // console.log(dancers.forEach(dancer => squareDanceStr(dancer, dancingQueue)));
+  // ophidian(starTrekQ);
 }
 main();

@@ -1,3 +1,6 @@
+// ================================================================================
+// 8. Queue implementation using a stack
+
 class _Node {
   constructor(data, next) {
     this.data = data

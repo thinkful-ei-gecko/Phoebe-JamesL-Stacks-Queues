@@ -1,3 +1,6 @@
+// ======================================================
+// 1. Create a stack class
+
 class _Node {
   constructor(data, next) {
     this.data = data
@@ -24,6 +27,9 @@ class Stack {
   }
 }
 
+// ======================================================
+// 2. Useful methods for a stack
+
 function peek(stack) {
   return stack.top.data
 }
@@ -42,6 +48,9 @@ function display(stack) {
     curr = curr.next
   }
 }
+
+// ======================================================
+// 3. Check for palindromes using a stack
 
 function is_palindrome(s) {
   let stack = new Stack()
@@ -63,6 +72,9 @@ function is_palindrome(s) {
 // console.log(is_palindrome("A man, a plan, a canal: Panama"));
 // console.log(is_palindrome("1001"));
 // console.log(is_palindrome("Tauhida"));
+
+// ======================================================
+//  4. Matching parentheses in an expression
 
 function matchParenth(str) {
   let stack = new Stack()
